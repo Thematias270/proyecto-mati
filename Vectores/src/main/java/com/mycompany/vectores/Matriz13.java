@@ -1,0 +1,43 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.vectores;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author spide
+ */
+public class Matriz13 {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        
+        String nombres [] = new String [5];
+        
+        System.out.println("Ingrese los nombres");
+        for (int i = 0; i < nombres.length; i++) {
+            nombres[i] = entrada.nextLine();
+        }
+        System.out.println("");
+        
+        System.out.println("los nombres ingresados son:");
+        for (int i = 0; i < nombres.length; i++) {
+            System.out.println(nombres[i]+ " ");
+        }System.out.println("");
+        
+        System.out.println("Ingrese la letra que quieres contar");
+        char letraAbuscar = entrada.nextLine().charAt(0);
+        
+        int contador = 0;
+        for (String fila : nombres) {
+                for (int i = 0; i < fila.length(); i++) {
+                    if (fila.charAt(i) == letraAbuscar) {
+                        contador++;
+                    }
+                }
+        }
+        System.out.println("La letra " + letraAbuscar + " aparece " + contador + " veces en la matriz ingresada");
+    }
+}
