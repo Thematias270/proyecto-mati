@@ -4,13 +4,13 @@
 
 package com.mycompany.prueba.gui;
 
-/**
- *
- * @author spide
- */
+import com.mycompany.prueba.gui.Ventana;
+
 public class Prueba {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Ventana princ = new Ventana();
+        princ.setVisible(true);
+        princ.setLocationRelativeTo(null);
     }
 }

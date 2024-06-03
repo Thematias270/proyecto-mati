@@ -25,6 +25,7 @@ public class ContactosControlador {
     private final String SQL_CREAR = "INSERT INTO contactos ( dni, nombre, apellido, correo, direccion , cp) VALUES (?,?, ?, ?,?,?)";
     private final String SQL_BORRAR = "DELETE FROM contactos WHERE dni = ?";
     private final String SQL_MOSTRAR = "SELECT * FROM contactos";
+    private final String SQL_EDITAR = "UPDATE contactos SET dni = ?,nombre = ?,apellido = ?, correo = ?,direccion = ?,cp = ? WHERE dni = ?";
     
     public void crearConctacto(String dni,String nombre,String apellido,String correo,String direccion ,String cp){
             
@@ -40,7 +41,7 @@ public class ContactosControlador {
             
             // Ejecutar la sentencia
             int filasInsertadas = instruccion.executeUpdate();
-            System.out.println("Contactos insertadas: " + filasInsertadas);
+            JOptionPane.showMessageDialog(null, "Contactos insertadas: " + filasInsertadas);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,6 +79,24 @@ public class ContactosControlador {
         
 
         return contactos;
+    }
+    
+    
+    public void editarContacto (String dni,String nombre,String apellido,String correo,String direccion ,String cp ,String dniUpdate){
+         try (PreparedStatement instruccion = conn.prepareStatement(SQL_EDITAR)){
+             instruccion.setString(1, dni);
+             instruccion.setString(2, nombre);
+             instruccion.setString(3, apellido);
+             instruccion.setString(4, correo);
+             instruccion.setString(5, direccion);
+             instruccion.setString(6, cp);
+             instruccion.setString(7, dniUpdate);
+             
+             int filaUpdate = instruccion.executeUpdate();
+             JOptionPane.showMessageDialog(null, " Contacto Actualizado " + filaUpdate);
+         }catch (SQLException e) {
+            e.printStackTrace(); // Manejo básico de excepciones, puedes mejorar según tus necesidades
+        }
     }
     
 }
