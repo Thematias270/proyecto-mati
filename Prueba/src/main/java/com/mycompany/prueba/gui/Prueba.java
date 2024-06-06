@@ -9,7 +9,7 @@ import com.mycompany.prueba.gui.Ventana;
 public class Prueba {
 
     public static void main(String[] args) {
-        Ventana princ = new Ventana();
+        Login princ = new Login();
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
     }
