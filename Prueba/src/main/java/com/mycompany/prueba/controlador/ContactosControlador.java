@@ -41,7 +41,13 @@ public class ContactosControlador {
             
             // Ejecutar la sentencia
             int filasInsertadas = instruccion.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Contactos insertadas: " + filasInsertadas);
+            JOptionPane.showMessageDialog(null, "Contacto Insertado: "
+                       + "Dni: " + dni + " \n "
+                       + "Nombre: " + nombre + "\n"
+                       + "Apellido: " + apellido + "\n"
+                       + "Correo: " + correo + "\n"
+                       + "Direccion: " + direccion + "\n"
+                       + "Codigo Postal: " + cp);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,11 +1,15 @@
 com\mycompany\prueba\gui\Ventana$3.class
 com\mycompany\prueba\controlador\Conexion.class
+com\mycompany\prueba\controlador\UsuariosControlador.class
+com\mycompany\prueba\gui\Registrar.class
 com\mycompany\prueba\gui\Login$3.class
 com\mycompany\prueba\gui\Login$2.class
 com\mycompany\prueba\gui\Ventana.class
 com\mycompany\prueba\gui\Ventana$5.class
 com\mycompany\prueba\gui\Ventana$4.class
 com\mycompany\prueba\gui\Ventana$6.class
+com\mycompany\prueba\modelo\UsuarioModelo.class
+com\mycompany\prueba\gui\Registrar$1.class
 com\mycompany\prueba\gui\Ventana$1.class
 com\mycompany\prueba\gui\Login$1.class
 com\mycompany\prueba\gui\Prueba.class
