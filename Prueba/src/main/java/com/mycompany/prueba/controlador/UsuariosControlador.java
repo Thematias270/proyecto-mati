@@ -43,6 +43,10 @@ public class UsuariosControlador {
             JOptionPane.showMessageDialog(null, "Error: La contraseña debe tener 12 o más caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (correoExiste(correo)) {
+        JOptionPane.showMessageDialog(null, "Error: El correo electrónico ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
         String salt = generarSalt();
         String contraseñaEncriptada = encriptarContraseña(contraseña, salt);
@@ -67,6 +71,15 @@ public class UsuariosControlador {
             JOptionPane.showMessageDialog(null, "Error al registrar el usuario: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    private boolean correoExiste(String correo) throws SQLException {
+    String SQL_VERIFICAR_CORREO = "SELECT correo FROM usuarios WHERE correo = ?";
+    try (PreparedStatement consulta = conn.prepareStatement(SQL_VERIFICAR_CORREO)) {
+        consulta.setString(1, correo);
+        try (ResultSet rs = consulta.executeQuery()) {
+            return rs.next();
+        }
+    }
+}
 
     private boolean validarFormatoCorreo(String correo) {
         String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
