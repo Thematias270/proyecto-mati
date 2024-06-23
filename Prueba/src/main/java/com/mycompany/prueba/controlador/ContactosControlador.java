@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,14 +25,31 @@ public class ContactosControlador {
     
     private ContactoModelo contacto = new ContactoModelo();
     private final String SQL_CREAR = "INSERT INTO contactos ( dni, nombre, apellido, correo, direccion , cp) VALUES (?,?, ?, ?,?,?)";
+    private final String SQL_VERIFICAR_DNI = "SELECT COUNT(*) AS total FROM contactos WHERE dni = ?";
+    private final String SQL_VERIFICAR_CORREO = "SELECT COUNT(*) AS total FROM contactos WHERE correo = ?";
     private final String SQL_BORRAR = "DELETE FROM contactos WHERE dni = ?";
     private final String SQL_MOSTRAR = "SELECT * FROM contactos";
     private final String SQL_EDITAR = "UPDATE contactos SET dni = ?,nombre = ?,apellido = ?, correo = ?,direccion = ?,cp = ? WHERE dni = ?";
     
     public void crearConctacto(String dni,String nombre,String apellido,String correo,String direccion ,String cp){
+         if (dni.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || correo.isEmpty() || direccion.isEmpty() || cp.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si algún campo está vacío
+        }
+        try {
+            if (dniExistente(dni)) {
+                JOptionPane.showMessageDialog(null, "Error: El Dni ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (correoExistente(correo)) {
+                JOptionPane.showMessageDialog(null, "Error: El Correo ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ContactosControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try (PreparedStatement instruccion = conn.prepareStatement(SQL_CREAR)) {
             
-           try (PreparedStatement instruccion = conn.prepareStatement(SQL_CREAR)) {
-
             // Establecer los valores
             instruccion.setString(1,dni );
             instruccion.setString(2,nombre );
@@ -42,15 +61,39 @@ public class ContactosControlador {
             // Ejecutar la sentencia
             int filasInsertadas = instruccion.executeUpdate();
             JOptionPane.showMessageDialog(null, "Contacto Insertado: "
-                       + "Dni: " + dni + " \n "
-                       + "Nombre: " + nombre + "\n"
-                       + "Apellido: " + apellido + "\n"
-                       + "Correo: " + correo + "\n"
-                       + "Direccion: " + direccion + "\n"
-                       + "Codigo Postal: " + cp);
+                    + "Dni: " + dni + " \n "
+                    + "Nombre: " + nombre + "\n"
+                    + "Apellido: " + apellido + "\n"
+                    + "Correo: " + correo + "\n"
+                    + "Direccion: " + direccion + "\n"
+                    + "Codigo Postal: " + cp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+   }
+   private boolean dniExistente(String dni) throws SQLException {
+        try (PreparedStatement stmtVerificar = conn.prepareStatement(SQL_VERIFICAR_DNI)) {
+            stmtVerificar.setString(1, dni);
+            ResultSet rs = stmtVerificar.executeQuery();
+
+            if (rs.next()) {
+                int total = rs.getInt("total");
+                return total > 0;
+            }
+        }
+        return false;
+    }
+   private boolean correoExistente(String correo) throws SQLException {
+        try (PreparedStatement stmtVerificar = conn.prepareStatement(SQL_VERIFICAR_CORREO)) {
+            stmtVerificar.setString(1, correo);
+            ResultSet rs = stmtVerificar.executeQuery();
+
+            if (rs.next()) {
+                int total = rs.getInt("total");
+                return total > 0;
+            }
+        }
+        return false;
     }
     public void eliminarContacto(String dni){
         

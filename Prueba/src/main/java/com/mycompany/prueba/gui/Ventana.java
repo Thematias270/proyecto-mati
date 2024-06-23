@@ -5,6 +5,7 @@
 package com.mycompany.prueba.gui;
 import com.mycompany.prueba.controlador.Conexion;
 import com.mycompany.prueba.controlador.ContactosControlador;
+import com.mycompany.prueba.controlador.UsuariosControlador;
 import com.mycompany.prueba.modelo.ContactoModelo;
 import java.awt.Component;
 import java.sql.*;
@@ -77,6 +78,7 @@ public class Ventana extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+        CerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 204));
@@ -201,10 +203,35 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        CerrarSesion.setBackground(new java.awt.Color(60, 78, 234));
+        CerrarSesion.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
+        CerrarSesion.setText("Cerrar Sesión");
+        CerrarSesion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(412, 412, 412)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(Guardar)
+                        .addGap(60, 60, 60)
+                        .addComponent(Mostrar)
+                        .addGap(60, 60, 60)
+                        .addComponent(Modificar)
+                        .addGap(60, 60, 60)
+                        .addComponent(eliminar)))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -249,32 +276,23 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(diretxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                     .addComponent(correotxt, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cptxt, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(412, 412, 412)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(Guardar)
-                        .addGap(60, 60, 60)
-                        .addComponent(Mostrar)
-                        .addGap(60, 60, 60)
-                        .addComponent(Modificar)
-                        .addGap(60, 60, 60)
-                        .addComponent(eliminar)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                    .addComponent(jSeparator4)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(170, 170, 170))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(CerrarSesion)
+                        .addGap(28, 28, 28))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(28, 28, 28)
+                .addComponent(CerrarSesion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -342,7 +360,7 @@ public class Ventana extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -446,12 +464,32 @@ public class Ventana extends javax.swing.JFrame {
         dnitxt.setEditable(true);
     }//GEN-LAST:event_ModificarActionPerformed
 
+    private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
+        // TODO add your handling code here:
+        UsuariosControlador cerrar = new UsuariosControlador();
+        
+        String[] options = {"Sí", "No"};
+        int response = JOptionPane.showOptionDialog(null, "¿Estás seguro de que deseas cerrar sesión?", "Confirmar Cierre de Sesión",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
+        if (response == JOptionPane.YES_OPTION) {
+            cerrar.cerrarSesion();
+
+            this.dispose();
+            Login login = new Login();
+            login.setVisible(true);
+        }
+
+
+    }//GEN-LAST:event_CerrarSesionActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CerrarSesion;
     private javax.swing.JButton Guardar;
     private javax.swing.JList<String> Lista;
     private javax.swing.JButton Modificar;
