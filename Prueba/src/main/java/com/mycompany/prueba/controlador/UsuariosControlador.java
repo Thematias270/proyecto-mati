@@ -151,7 +151,7 @@ public class UsuariosControlador {
         return matcher.matches();
     }
 
-    public String generarSalt() {
+    public String generarSalt() { //hasheo
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
