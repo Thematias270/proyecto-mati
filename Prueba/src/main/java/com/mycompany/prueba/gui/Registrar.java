@@ -8,6 +8,7 @@ import com.mycompany.prueba.controlador.UsuariosControlador;
 import com.mycompany.prueba.modelo.UsuarioModelo;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 public class Registrar extends javax.swing.JFrame {
     
     
-
+    
     /**
      * Creates new form Registrar
      */
@@ -25,7 +26,11 @@ public class Registrar extends javax.swing.JFrame {
     
     public Registrar() {
         initComponents();
+        mostrarMensajeFormatoContrasena();
         
+    }
+    private void mostrarMensajeFormatoContrasena() {
+        JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos:\n- 12 caracteres\n- Una letra mayúscula\n- Una letra minúscula\n- Un número\n- Un carácter especial", "Requisitos de Contraseña", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -88,6 +93,11 @@ public class Registrar extends javax.swing.JFrame {
         passtxt.setFont(new java.awt.Font("Malgun Gothic", 1, 24)); // NOI18N
         passtxt.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         passtxt.setBorder(null);
+        passtxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passtxtActionPerformed(evt);
+            }
+        });
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\spide\\OneDrive\\Documentos\\NetBeansProjects\\Prueba\\src\\main\\java\\com\\mycompany\\prueba\\imagenes\\userInicio.png")); // NOI18N
 
@@ -140,7 +150,7 @@ public class Registrar extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(passtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(passtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -160,7 +170,7 @@ public class Registrar extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(78, 78, 78)
                 .addComponent(jLabel3)
-                .addGap(34, 34, 34)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addComponent(passtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,7 +180,7 @@ public class Registrar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Registrar)
                     .addComponent(jButton2))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -209,6 +219,10 @@ public class Registrar extends javax.swing.JFrame {
         
         login.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void passtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passtxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passtxtActionPerformed
 
     /**
      * @param args the command line arguments

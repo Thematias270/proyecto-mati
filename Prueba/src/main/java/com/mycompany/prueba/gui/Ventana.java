@@ -47,7 +47,7 @@ public class Ventana extends javax.swing.JFrame {
         return this;
     }
 }
-    
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -176,7 +176,7 @@ public class Ventana extends javax.swing.JFrame {
         Mostrar.setBackground(new java.awt.Color(60, 78, 234));
         Mostrar.setFont(new java.awt.Font("Malgun Gothic", 1, 24)); // NOI18N
         Mostrar.setForeground(new java.awt.Color(255, 255, 255));
-        Mostrar.setText("Mostrar");
+        Mostrar.setText("Consultar");
         Mostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MostrarActionPerformed(evt);
@@ -231,7 +231,7 @@ public class Ventana extends javax.swing.JFrame {
                         .addComponent(Modificar)
                         .addGap(60, 60, 60)
                         .addComponent(eliminar)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -382,6 +382,8 @@ public class Ventana extends javax.swing.JFrame {
         
         
         guardar.crearConctacto(dni,nombre,apellido,correo,direccion,codigo);
+        
+        actualizarListaContactos();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -391,6 +393,8 @@ public class Ventana extends javax.swing.JFrame {
         String dni = dnitxt.getText();
         
         eliminar.eliminarContacto(dni);
+        
+        actualizarListaContactos();
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
@@ -462,6 +466,7 @@ public class Ventana extends javax.swing.JFrame {
         
         editar.editarContacto(dni, nombre, apellido, correo, direccion, codigo, dni);
         dnitxt.setEditable(true);
+        actualizarListaContactos();
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
@@ -482,7 +487,10 @@ public class Ventana extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_CerrarSesionActionPerformed
-
+private void actualizarListaContactos() {
+    // Llamar al método para mostrar los contactos actualizados
+    MostrarActionPerformed(null); // Pasa null como ActionEvent porque no se necesita información adicional
+}   
     /**
      * @param args the command line arguments
      */

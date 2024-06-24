@@ -18,7 +18,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author spide
@@ -31,7 +30,7 @@ public class UsuariosControlador {
     private UsuarioModelo usuario = new UsuarioModelo();
     private final String SQL_CREAR = "INSERT INTO usuarios (correo, contraseñaEncriptada, salt) VALUES (?, ?, ?)";
     private final String SQL_MOSTRAR = "SELECT correo, contraseñaEncriptada, salt FROM usuarios WHERE correo = ?";
-    private final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
+    private final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{12,}$";
     private final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 
     public void CrearUsuario(String correo, String contraseña) throws SQLException {
@@ -39,8 +38,12 @@ public class UsuariosControlador {
             JOptionPane.showMessageDialog(null, "Error: El formato del correo electrónico es inválido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (contraseña.length() < 12 || !validarFormatoContraseña(contraseña)) {
+        if (contraseña.length() < 12) {
             JOptionPane.showMessageDialog(null, "Error: La contraseña debe tener 12 o más caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!validarFormatoContraseña(contraseña)) {
+            JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos:\n- 12 caracteres\n- Una letra mayúscula\n- Una letra minúscula\n- Un número\n- Un carácter especial", "Requisitos de Contraseña", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         if (correoExiste(correo)) {
