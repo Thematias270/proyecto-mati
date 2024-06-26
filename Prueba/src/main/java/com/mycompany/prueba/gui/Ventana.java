@@ -31,22 +31,30 @@ public class Ventana extends javax.swing.JFrame {
     public Ventana() {
         initComponents();
     }
-   
+        private void limpiarCampos() {
+        dnitxt.setText("");
+        nametxt.setText("");
+        apetxt.setText("");
+        correotxt.setText("");
+        diretxt.setText("");
+        cptxt.setText("");
+    }
+
     public class ContactListRenderer extends JTextArea implements ListCellRenderer<String> {
 
-    public ContactListRenderer() {
-        setLineWrap(true);
-        setWrapStyleWord(true);
-    }
+        public ContactListRenderer() {
+            setLineWrap(true);
+            setWrapStyleWord(true);
+        }
 
-    public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
-        setText(value);
-        setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
-        setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
-        setFont(list.getFont());
-        return this;
+        public Component getListCellRendererComponent(JList<? extends String> list, String value, int index, boolean isSelected, boolean cellHasFocus) {
+            setText(value);
+            setBackground(isSelected ? list.getSelectionBackground() : list.getBackground());
+            setForeground(isSelected ? list.getSelectionForeground() : list.getForeground());
+            setFont(list.getFont());
+            return this;
+        }
     }
-}
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -370,6 +378,7 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dnitxtActionPerformed
 
+    
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         ContactosControlador guardar = new ContactosControlador();
         
@@ -384,6 +393,8 @@ public class Ventana extends javax.swing.JFrame {
         guardar.crearConctacto(dni,nombre,apellido,correo,direccion,codigo);
         
         actualizarListaContactos();
+        
+        limpiarCampos();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
@@ -423,6 +434,8 @@ public class Ventana extends javax.swing.JFrame {
         }
         Lista.setModel(model);
         Lista.setCellRenderer(new ContactListRenderer());
+        limpiarCampos();
+        
     }//GEN-LAST:event_MostrarActionPerformed
 
     private void ListaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaValueChanged
@@ -467,6 +480,7 @@ public class Ventana extends javax.swing.JFrame {
         editar.editarContacto(dni, nombre, apellido, correo, direccion, codigo, dni);
         dnitxt.setEditable(true);
         actualizarListaContactos();
+        limpiarCampos();
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
