@@ -226,7 +226,7 @@ public void generarReportePDF() {
             document.add(new Paragraph("Código Postal: " + contacto.getCp()));
             document.add(new Paragraph("------------------------------"));
         }
-        document.close(); // Asegúrate de cerrar el documento
+        document.close();
         JOptionPane.showMessageDialog(null, "¡PDF generado correctamente!");
         
             File pdfFile = new File(rutaArchivo);
