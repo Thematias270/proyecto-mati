@@ -10,6 +10,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mycompany.prueba.modelo.ContactoModelo;
 import com.mycompany.prueba.modelo.UsuarioModelo;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -209,7 +211,8 @@ public void generarReportePDF() {
 
     // Crear el documento PDF
     Document document = new Document();
-    try (FileOutputStream fos = new FileOutputStream("NetBeansProjects/Prueba/PDFs/reporte_contactos.pdf")) {
+    String rutaArchivo = "C:\\Users\\spide\\OneDrive\\Documentos\\NetBeansProjects\\Prueba\\PDFs\\reporte_usuarios.pdf";
+    try (FileOutputStream fos = new FileOutputStream(rutaArchivo)) {
         PdfWriter.getInstance(document, fos);
         document.open();
         document.add(new Paragraph("Reporte de Contactos"));
@@ -225,6 +228,13 @@ public void generarReportePDF() {
         }
         document.close(); // Asegúrate de cerrar el documento
         JOptionPane.showMessageDialog(null, "¡PDF generado correctamente!");
+        
+            File pdfFile = new File(rutaArchivo);
+            if (pdfFile.exists()) {
+                Desktop.getDesktop().open(pdfFile);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error: El archivo PDF no se encontró.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
     } catch (DocumentException | IOException e) {
         e.printStackTrace();
