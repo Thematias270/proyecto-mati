@@ -4,7 +4,14 @@
  */
 package com.mycompany.prueba.controlador;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.mycompany.prueba.modelo.ContactoModelo;
+import com.mycompany.prueba.modelo.UsuarioModelo;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -175,4 +182,62 @@ public class ContactosControlador {
         }
         return false;
     }
+
+public void generarReportePDF() {
+    List<ContactoModelo> listaContactos = new ArrayList<>();
+
+    // Obtener datos de contactos
+    try (PreparedStatement consulta = conn.prepareStatement(SQL_MOSTRAR);
+         ResultSet rs = consulta.executeQuery()) {
+
+        while (rs.next()) {
+            ContactoModelo contacto = new ContactoModelo();
+            contacto.setDni(rs.getString("dni"));
+            contacto.setNombre(rs.getString("nombre"));
+            contacto.setApellido(rs.getString("apellido"));
+            contacto.setCorreo(rs.getString("correo"));
+            contacto.setDireccion(rs.getString("direccion"));
+            contacto.setCp(rs.getString("cp"));
+            listaContactos.add(contacto);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al obtener datos de los contactos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método si ocurre un error en la consulta
+    }
+
+    // Crear el documento PDF
+    Document document = new Document();
+    try (FileOutputStream fos = new FileOutputStream("NetBeansProjects/Prueba/PDFs/reporte_contactos.pdf")) {
+        PdfWriter.getInstance(document, fos);
+        document.open();
+        document.add(new Paragraph("Reporte de Contactos"));
+        document.add(new Paragraph("==================================="));
+        for (ContactoModelo contacto : listaContactos) {
+            document.add(new Paragraph("DNI: " + contacto.getDni()));
+            document.add(new Paragraph("Nombre: " + contacto.getNombre()));
+            document.add(new Paragraph("Apellido: " + contacto.getApellido()));
+            document.add(new Paragraph("Correo: " + contacto.getCorreo()));
+            document.add(new Paragraph("Dirección: " + contacto.getDireccion()));
+            document.add(new Paragraph("Código Postal: " + contacto.getCp()));
+            document.add(new Paragraph("------------------------------"));
+        }
+        document.close(); // Asegúrate de cerrar el documento
+        JOptionPane.showMessageDialog(null, "¡PDF generado correctamente!");
+
+    } catch (DocumentException | IOException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al generar el PDF: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
+}
+

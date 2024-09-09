@@ -5,9 +5,11 @@ com\mycompany\prueba\gui\Registrar.class
 com\mycompany\prueba\gui\Login$2.class
 com\mycompany\prueba\gui\Ventana$4.class
 com\mycompany\prueba\gui\Registrar$2.class
+com\mycompany\prueba\gui\Ventana$9.class
 com\mycompany\prueba\gui\Prueba.class
 com\mycompany\prueba\gui\Registrar$3.class
 com\mycompany\prueba\controlador\ContactosControlador.class
+com\mycompany\prueba\gui\Ventana$10.class
 com\mycompany\prueba\gui\Ventana$2.class
 com\mycompany\prueba\gui\Login$5.class
 com\mycompany\prueba\gui\Ventana$7.class

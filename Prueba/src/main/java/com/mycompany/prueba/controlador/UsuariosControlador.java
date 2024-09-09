@@ -13,10 +13,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -30,6 +38,7 @@ public class UsuariosControlador {
     private UsuarioModelo usuario = new UsuarioModelo();
     private final String SQL_CREAR = "INSERT INTO usuarios (correo, contraseñaEncriptada, salt) VALUES (?, ?, ?)";
     private final String SQL_MOSTRAR = "SELECT correo, contraseñaEncriptada, salt FROM usuarios WHERE correo = ?";
+    private final String SQL_OBTENER_USUARIOS = "SELECT correo, contraseñaEncriptada, salt FROM usuarios";
     private final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{12,}$";
     private final Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 
@@ -179,6 +188,6 @@ public class UsuariosControlador {
                 e.printStackTrace();
             }
         }
-        JOptionPane.showMessageDialog(null, " Sesión cerrada correctamente.");
+        JOptionPane.showMessageDialog(null, "Sesión cerrada correctamente.");
     }
 }
