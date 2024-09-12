@@ -10,6 +10,14 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mycompany.prueba.modelo.ContactoModelo;
 import com.mycompany.prueba.modelo.UsuarioModelo;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,9 +28,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -249,5 +259,33 @@ public void generarReportePDF() {
         }
     }
 }
+    public void enviarCorreo(String destinatario, String asunto, String mensaje) {
+        final String usuario = "matymoran4@gmail.com";
+        final String contrasena = "uang ufbk devt mggr";
+        Properties propiedades = new Properties();
+        propiedades.put("mail.smtp.auth", "true");
+        propiedades.put("mail.smtp.starttls.enable", "true");
+        propiedades.put("mail.smtp.host", "smtp.gmail.com");
+        propiedades.put("mail.smtp.port", "587");
+
+        Session sesion = Session.getInstance(propiedades, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(usuario, contrasena);
+            }
+        });
+
+        try {
+            MimeMessage mensajeCorreo = new MimeMessage(sesion);
+            mensajeCorreo.setFrom(new InternetAddress(usuario));
+            mensajeCorreo.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            mensajeCorreo.setSubject(asunto);
+            mensajeCorreo.setText(mensaje);
+            Transport.send(mensajeCorreo);
+            JOptionPane.showMessageDialog(null, "Correo enviado exitosamente.");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
