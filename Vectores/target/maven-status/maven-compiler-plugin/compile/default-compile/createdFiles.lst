@@ -2,7 +2,12 @@ com\mycompany\vectores\Matriz15.class
 com\mycompany\vectores\Matriz6.class
 com\mycompany\vectores\Matriz10.class
 com\mycompany\vectores\Matriz20.class
+com\mycompany\vectores\M2triz.class
+com\mycompany\vectores\ArrayListEjemplo.class
+com\mycompany\vectores\MatrizEjemplo.class
+com\mycompany\vectores\Array.class
 com\mycompany\vectores\Matriz13.class
+com\mycompany\vectores\ArrayEjemplo.class
 com\mycompany\vectores\Matriz9.class
 com\mycompany\vectores\Matriz2.class
 com\mycompany\vectores\Matriz7.class
@@ -11,10 +16,13 @@ com\mycompany\vectores\Matriz23.class
 com\mycompany\vectores\Vectores.class
 com\mycompany\vectores\Vectores2.class
 com\mycompany\vectores\Matriz18.class
+com\mycompany\vectores\Vect0r.class
 com\mycompany\vectores\Matriz5.class
 com\mycompany\vectores\Matriz11.class
 com\mycompany\vectores\Matriz16.class
 com\mycompany\vectores\Matriz21.class
+com\mycompany\vectores\Vectores4.class
+com\mycompany\vectores\ArrayList1.class
 com\mycompany\vectores\Matriz22.class
 com\mycompany\vectores\Matriz12.class
 com\mycompany\vectores\Matriz8.class
@@ -22,5 +30,7 @@ com\mycompany\vectores\Matriz19.class
 com\mycompany\vectores\Matriz.class
 com\mycompany\vectores\Matriz14.class
 com\mycompany\vectores\Matriz17.class
+com\mycompany\vectores\VectorEjemplo.class
 com\mycompany\vectores\Vectores3.class
+com\mycompany\vectores\Matriz24.class
 com\mycompany\vectores\Matriz3.class
