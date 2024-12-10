@@ -10,16 +10,18 @@ package com.mycompany.prueba.modelo;
  */
 public class ContactoModelo {
     
+    //Atributos
     private String dni;
     private String nombre;
     private String apellido;
     private String correo;
     private String direccion;
     private String cp;
-
+    
+    //Contructor vacio
     public ContactoModelo() {
     }
-
+    //Contructor
     public ContactoModelo(String dni, String nombre, String apellido, String correo, String direccion, String cp) {
         this.dni = dni;
         this.nombre = nombre;
@@ -28,7 +30,7 @@ public class ContactoModelo {
         this.direccion = direccion;
         this.cp = cp;
     }
-
+    //geter y seters
     public String getDni() {
         return dni;
     }
